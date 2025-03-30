@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function useAuthError(initialValue) {
+export default function useSetError(initialValue) {
 
     const [error, setError] = useState(initialValue);
 
