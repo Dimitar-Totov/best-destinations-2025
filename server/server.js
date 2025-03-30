@@ -1351,6 +1351,7 @@
             "7031ba71-ae15-46fe-84d5-07b20b52a738": {
                 "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
                 "country": "French Polynesia",
+                "town": "Vaitape",
                 "name": "Bora Bora",
                 "imageUrl": "https://www.polynesiaparadise.com/wp-content/uploads/bungalows-bora-bora.jpg",
                 "seasons": "Summer",
@@ -1361,6 +1362,7 @@
             "69c4bbed-112c-463a-9da9-a0c884f97603": {
                 "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
                 "country": "France",
+                "town": "Paris",
                 "name": "Eiffel Tower",
                 "imageUrl": "https://149990825.v2.pressablecdn.com/wp-content/uploads/2023/09/Paris1.jpg",
                 "seasons": "Summer",
@@ -1371,6 +1373,7 @@
             "6de1ba6c-be01-41f4-afe6-2e37941d0040": {
                 "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
                 "country": "UK",
+                "town": "London",
                 "name": "Tower Bridge",
                 "imageUrl": "https://i0.wp.com/www.awalkandalark.com/wp-content/uploads/2020/03/Tower-Bridge-at-night.jpg?fit=1100%2C825&ssl=1",
                 "seasons": "Spring",
@@ -1381,6 +1384,7 @@
             "1479ad1d-991a-48ea-b0d2-1b021551e408": {
                 "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
                 "country": "Italy",
+                "town": "Rome",
                 "name": "Colosseum",
                 "imageUrl": "https://www.citalia.com/-/media/bynder/citalia-destinations/italy/cities/rome/rome-2023-colosseum-shutterstock-2120859782-hybris.jpg?rev=8aa72fc2fea643baa7b321f3553089de",
                 "seasons": "Winter",
@@ -1391,6 +1395,7 @@
             "a456a100-613c-4c78-983a-c5d706a2472d": {
                 "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
                 "country": "Indonesia",
+                "town": "Denpasar",
                 "name": "Bali",
                 "imageUrl": "https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/royal/data/ports/benoa-bali-indonesia/overview/benoa-bali-indonesia-exotic-beach-white-sands.jpg?$1440x600$",
                 "seasons": "Summer",
@@ -1401,6 +1406,7 @@
             "12e21a5c-f6a7-4c7f-bbd9-bfd5fb18d1e9": {
                 "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
                 "country": "Thailand",
+                "town": "Bangkok",
                 "name": "The Grand Palace",
                 "imageUrl": "https://image-tc.galaxy.tf/wijpeg-d944dc29e9201fbxivvvbti36/istock-496578476_standard.jpg?crop=50%2C0%2C800%2C600",
                 "seasons": "Winter",
@@ -1411,6 +1417,7 @@
             "5401c0c7-2ab0-407c-8c36-c5a0b1f58d5b": {
                 "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
                 "country": "United Arab Emirates",
+                "town": "Dubai",
                 "name": "Burj Al Arab",
                 "imageUrl": "https://media.tacdn.com/media/attractions-splice-spp-674x446/0e/92/f2/6e.jpg",
                 "seasons": "Winter",
