@@ -1,6 +1,10 @@
 import { useParams } from "react-router";
+
 import { useCreateComment, useGetAllComments } from "../../api/commentsApi";
+
 import useAuth from "../../hooks/useAuth";
+import useSetError from "../../hooks/useSetError";
+
 import formatDate from "../../utils/formatDate";
 
 export default function Comments() {
@@ -10,19 +14,32 @@ export default function Comments() {
     const { username, isAuthenticated } = useAuth()
     const { create } = useCreateComment();
     const { comments, setComments } = useGetAllComments(destinationId);
+    const [error, setError] = useSetError(null);
 
     const formActionHandler = async (formData) => {
+        
         const comment = formData.get('comment');
+
         try {
             const newComment = await create(destinationId, comment, username);
             setComments(state => [...state, newComment]);
         } catch (err) {
-            console.log(err.message);
+            setError(err.message);
+            setTimeout(() => {
+                setError(null)
+            }, 4000)
         }
     }
 
     return (
         <section className="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
+
+            {error && (
+                <div className="bg-red-100 border-l-4 text-center border-red-500 text-red-700 p-4 rounded-lg shadow-md mt-4">
+                    <p>{error}</p>
+                </div>
+            )}
+
             <div className="max-w-2xl mx-auto px-4">
                 <div className="flex justify-between items-center mb-6">
                     <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Comments about this destination ({comments.length})</h2>

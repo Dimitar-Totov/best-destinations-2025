@@ -4,15 +4,15 @@ import { useContext, useState} from "react";
 import { useLogin } from "../../api/authApi";
 import { UserContext } from "../../contexts/UserContext";
 
-import useAuthError from "../../hooks/useSetError";
 import mountainPicture from '../../assets/images/mountain.jpg'
+import useSetError from "../../hooks/useSetError";
 
 export default function Login() {
 
     const navigate = useNavigate();
     const { login } = useLogin();
     const { userLoginHandler } = useContext(UserContext);
-    const [loginError, setLoginError] = useAuthError(null);
+    const [loginError, setLoginError] = useSetError(null);
 
     const [inputData, setInputData] = useState({
         email: '',
@@ -58,7 +58,7 @@ export default function Login() {
                     </div>
                 )}
 
-                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm rounded-xl bg-gray-100 p-6">
+                <div className="mt-20 sm:mx-auto sm:w-full sm:max-w-sm rounded-xl bg-gray-100 p-6">
                     <form onSubmit={formSubmitHandler} className="space-y-6">
                         <div>
                             <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">

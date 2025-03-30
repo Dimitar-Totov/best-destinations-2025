@@ -1,12 +1,17 @@
 import { useNavigate, useParams } from "react-router";
+
 import { useEditDestination, useGetOneDestination } from "../../api/destinationsApi";
+import useSetError from "../../hooks/useSetError";
+
+import video from '../../assets/videos/createPage.mp4'
 
 export default function Edit() {
 
     const navigate = useNavigate();
     const { destinationId } = useParams();
     const { destination } = useGetOneDestination()
-    const { edit } = useEditDestination()
+    const { edit } = useEditDestination();
+    const [error, setError] = useSetError(null)
 
     const cancelClickHandler = (e) => {
         e.preventDefault();
@@ -15,87 +20,123 @@ export default function Edit() {
 
     const formSubmitHandler = async (e) => {
         e.preventDefault();
+
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
 
-        await edit(destinationId, data);
-        navigate(`/destinations/${destinationId}/details`);
+        try {
+            await edit(destinationId, data);
+            navigate(`/destinations/${destinationId}/details`);
+        } catch (err) {
+            setError(err.message);
+
+            setTimeout(() => {
+                setError(null);
+            }, 6000);
+        }
     }
 
     return (
-        <section className="flex justify-center items-center h-screen bg-gray-100">
-            <div className="bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
-                <form onSubmit={formSubmitHandler} className="space-y-4">
-                    <div className="gap-4 sm:grid-cols-2 text-center">
-                        <label className="sr-only " htmlFor="country"></label>
-                        <input
-                            className="text-left w-80 rounded-md bg-white px-3 py-1.5 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                            placeholder="Country"
-                            type="text"
-                            name="country"
-                            defaultValue={destination.country}
-                        />
-                    </div>
+        <div className="relative h-screen bg-gray-200 blue:bg-blue-500">
+            <video
+                autoPlay
+                loop
+                muted
+                className="absolute inset-0 w-full h-full object-cover"
+            >
+                <source
+                    src={video}
+                    type="video/mp4"
+                />
+            </video>
 
-                    <div className="gap-4 sm:grid-cols-2 text-center">
-                        <div>
-                            <label className="sr-only" htmlFor="name"></label>
+            <div className="relative z-10 flex items-center justify-center h-full">
+                <div className="mt-20 container bg-gray-100 w-150 p-8 shadow-lg rounded-lg font-style: italic">
+
+                    {error && (
+                        <div className="flex items-center justify-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
+                            <svg className="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fillRule="evenodd" d="M18 10c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8zm-8-3a1 1 0 011 1v3a1 1 0 11-2 0V8a1 1 0 011-1zm0 7a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd"></path>
+                            </svg>
+                            <span className="font-medium">{error}</span>
+                        </div>
+                    )}
+
+                    <form onSubmit={formSubmitHandler}>
+                        <div className="mb-4">
+                            <label htmlFor="country" className="block text-gray-700">Country</label>
                             <input
-                                className="text-left w-80 rounded-md bg-white px-3 py-1.5 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                                placeholder="Destination name"
+                                defaultValue={destination.country}
+                                type="text"
+                                name="country"
+                                id="country"
+                                className="w-full px-4 py-2 border rounded"
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="town" className="block text-gray-700">Town</label>
+                            <input
+                                defaultValue={destination.town}
+                                type="text"
+                                name="town"
+                                id="town"
+                                className="w-full px-4 py-2 border rounded"
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="name" className="block text-gray-700">Name</label>
+                            <input
+                                defaultValue={destination.name}
                                 type="text"
                                 name="name"
-                                defaultValue={destination.name}
+                                id="name"
+                                className="w-full px-4 py-2 border rounded"
                             />
                         </div>
-                    </div>
-
-                    <div className="gap-4 sm:grid-cols-2 text-center">
-                        <div>
-                            <label className="sr-only" htmlFor="imageUrl"></label>
+                        <div className="mb-4">
+                            <label htmlFor="imageUrl" className="block text-gray-700">Image url</label>
                             <input
-                                className="text-left w-80 rounded-md bg-white px-3 py-1.5 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                                placeholder="Image url"
+                                defaultValue={destination.imageUrl}
                                 type="text"
                                 name="imageUrl"
-                                defaultValue={destination.imageUrl}
+                                id="imageUrl"
+                                className="w-full px-4 py-2 border rounded"
                             />
                         </div>
-                    </div>
-
-                    <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900">Best season to visit</label>
-                    <select name="seasons" className="bg-white outline-gray-300 text-gray-700 text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 w-full p-2.5 outline-1 -outline-offset-1 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-                        <option defaultValue={'All seasons'} selected={destination.seasons === 'All seasons'}>All seasons</option>
-                        <option defaultValue={'Spring'} selected={destination.seasons === 'Spring'}>Spring</option>
-                        <option defaultValue={'Summer'} selected={destination.seasons === 'Summer'}>Summer</option>
-                        <option defaultValue={'Fall'} selected={destination.seasons === 'Fall'}>Fall</option>
-                        <option defaultValue={'Winter'} selected={destination.seasons === 'Winter'}>Winter</option>
-                    </select>
-
-                    <div className="gap-4 sm:grid-cols-2 text-center">
-                        <div>
-                            <label className="sr-only" htmlFor="description"></label>
-
+                        <div className="mb-4">
+                            <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-700 dark:text-white">Best season to visit</label>
+                            <select id="countries" name="seasons" defaultValue={destination.seasons} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected={destination.seasons === 'All seasons'} value="All seasons">All seasons</option>
+                                <option selected={destination.seasons === 'Spring'} value="Spring">Spring</option>
+                                <option selected={destination.seasons === 'Summer'} value="Summer">Summer</option>
+                                <option selected={destination.seasons === 'Fall'} value="Fall">Fall</option>
+                                <option selected={destination.seasons === 'Winter'} value="Winter">Winter</option>
+                            </select>
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="description" className="block text-gray-700">Description</label>
                             <textarea
-                                className="text-left w-80 rounded-md bg-white px-3 py-1.5 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                                placeholder="Description"
-                                rows="8"
-                                name="description"
                                 defaultValue={destination.description}
+                                name="description"
+                                id="description"
+                                rows="6"
+                                className="w-full px-4 py-2 border rounded resize-y"
                             ></textarea>
                         </div>
-                    </div>
-
-                    <div className="flex justify-center gap-4 m-10">
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">
-                            Edit
-                        </button>
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={cancelClickHandler}>
-                            Cancel
-                        </button>
-                    </div>
-                </form>
+                        <div className="flex justify-center gap-4 m-10">
+                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">
+                                Edit
+                            </button>
+                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={cancelClickHandler}>
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </section>
+        </div>
     )
 }
+
+
+

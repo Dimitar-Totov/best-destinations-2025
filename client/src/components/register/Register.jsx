@@ -4,14 +4,14 @@ import { useRegister } from "../../api/authApi";
 import { UserContext } from "../../contexts/UserContext";
 
 import mountainPicture from '../../assets/images/mountain.jpg'
-import useAuthError from "../../hooks/useSetError";
+import useSetError from "../../hooks/useSetError";
 
 export default function Register() {
 
     const navigate = useNavigate();
     const { register } = useRegister();
     const { userLoginHandler } = useContext(UserContext);
-    const [registerError, setRegisterError] = useAuthError(null);
+    const [registerError, setRegisterError] = useSetError(null);
 
     const [inputData, setInputData] = useState({
         username: '',
@@ -55,7 +55,7 @@ export default function Register() {
                         <span className="font-medium">{registerError}</span>
                     </div>
                 )}
-                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-md rounded-xl bg-gray-100 p-6">
+                <div className="mt-50 sm:mx-auto sm:w-full sm:max-w-md rounded-xl bg-gray-100 p-6">
                     <form onSubmit={formSubmitHandler} className="space-y-6">
                         <div>
                             <label htmlFor="username" className="block text-sm/6 font-medium text-black">

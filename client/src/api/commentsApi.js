@@ -25,7 +25,14 @@ export const useGetAllComments = (destinationId) => {
 export const useCreateComment = () => {
     const { authorizationOptions } = useAuth();
 
-    const create = (destinationId, commentData, author) => request('POST', baseUrl, { destinationId, comment: commentData, author }, authorizationOptions);
+    const create = (destinationId, commentData, author) => {
+
+        if (commentData.length < 5) {
+            throw new Error('Your comment should be at least 5 letters long.');
+        }
+
+        return request('POST', baseUrl, { destinationId, comment: commentData, author }, authorizationOptions);
+    };
 
     return {
         create
