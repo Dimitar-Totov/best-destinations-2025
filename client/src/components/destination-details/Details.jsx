@@ -181,7 +181,7 @@ export default function Details() {
                             </button>
                         </div>
                     )}
-                    <Comments />
+                    <Comments isCreator={isCreator}/>
                 </>
             )}
 
