@@ -72,7 +72,7 @@ export const useLogout = () => {
         }
 
         request('GET', `${baseUrl}/logout`, null, authorizationOptions)
-            .then(userLogoutHandler)
+            .then(userLogoutHandler);
    
     }, [accessToken, userLogoutHandler])
 
