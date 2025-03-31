@@ -14,6 +14,7 @@ export const useGetAllDestinations = () => {
     const [fetchError, setFetchError] = useSetError(null);
 
     useEffect(() => {
+
         const fetchData = async () => {
             try {
                 const data = await request('GET', baseUrl);

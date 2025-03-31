@@ -12,17 +12,12 @@ export const useGetAllComments = (destinationId) => {
 
     useEffect(() => {
 
-        const controller = new AbortController();
-        const signal = controller.signal;
-
         const searchParams = new URLSearchParams({
             where: `destinationId="${destinationId}"`,
         });
 
-        request('GET', `${baseUrl}?${searchParams.toString()}`, null, { signal })
+        request('GET', `${baseUrl}?${searchParams.toString()}`)
             .then(setComments);
-
-        return () => controller.abort();
 
     }, [destinationId]);
 
