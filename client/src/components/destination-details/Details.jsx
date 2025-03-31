@@ -1,6 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router";
 
 import { useDeleteDestination, useGetOneDestination } from "../../api/destinationsApi"
+import { useCreateLike, useGetLikes } from "../../api/likesApi";
 
 import useAuth from "../../hooks/useAuth";
 import useStateHook from "../../hooks/useStateHook";
@@ -16,9 +17,16 @@ export default function Details() {
     const { deleteDestination } = useDeleteDestination();
     const { _id: userId, isAuthenticated } = useAuth();
     const [guestLikeError, setGuestLikeError] = useStateHook(false);
-    const { deleteError, setDeleteError } = useSetError(null);
+    const [deleteError, setDeleteError] = useSetError(null);
+    const { create } = useCreateLike();
+    const { likes, setLikes } = useGetLikes(destinationId);
+    const [likeError, setLikeError] = useSetError(null);
 
     const isCreator = userId === destination._ownerId;
+    let alreadyLiked=null;
+    if (likes) {
+        alreadyLiked = likes.find(like => like.userId === userId);
+    }
 
     const deleteClickHandler = async () => {
         const hasConfirm = confirm('Are you sure you want to delete this destination ?');
@@ -37,13 +45,34 @@ export default function Details() {
         }
     }
 
-    const likeButtonHandler = (e) => {
+    const likeButtonHandler = async (e) => {
         if (!isAuthenticated) {
             setGuestLikeError(true);
 
             setTimeout(() => {
                 setGuestLikeError(false);
             }, 4000);
+            return;
+        }
+
+        if (isCreator) {
+            return;
+        }
+
+        if (alreadyLiked) {
+            setLikeError(true);
+
+            setTimeout(() => {
+                setLikeError(null);
+            }, 4000);
+            return;
+        }
+
+        try {
+            const response = await create(destinationId, userId);
+            setLikes(state => ([...state, response]));
+        } catch (err) {
+            setLikeError(err.message);
         }
     }
 
@@ -104,11 +133,8 @@ export default function Details() {
 
                                 <div className="hs-tooltip inline-block">
                                     <button onClick={likeButtonHandler} type="button" className="hs-tooltip-toggle flex items-center gap-x-2 text-sm text-gray-500 hover:text-gray-800 focus:outline-hidden focus:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200 dark:focus:text-neutral-200">
-                                        <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
-                                        875
-                                        <span className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded-md shadow-2xs dark:bg-black" role="tooltip">
-                                            Like
-                                        </span>
+                                        <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={alreadyLiked ? "red" : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" /></svg>
+                                        {likes?.length}
                                     </button>
                                 </div>
                             </div>
@@ -118,6 +144,12 @@ export default function Details() {
                     {guestLikeError && (
                         <div className="bg-red-100 border-l-4 text-center border-red-500 text-red-700 p-4 rounded-lg shadow-md mt-4">
                             <p>Sorry, you must be logged in to like this.</p>
+                        </div>
+                    )}
+
+                    {likeError && (
+                        <div className="bg-red-100 border-l-4 text-center border-red-500 text-red-700 p-4 rounded-lg shadow-md mt-4">
+                            <p>You have already liked this destination.</p>
                         </div>
                     )}
 
