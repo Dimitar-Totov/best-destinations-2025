@@ -36,6 +36,7 @@ export default function Create() {
       setError(err.message);
 
       setTimeout(() => {
+
         setError(null);
       }, 6000);
     }

@@ -3,17 +3,36 @@ import { useParams } from "react-router"
 
 import useAuth from "../hooks/useAuth";
 import useSetError from "../hooks/useSetError";
+import useStateHook from "../hooks/useStateHook";
 
 import request from "../utils/request";
-import useStateHook from "../hooks/useStateHook";
 
 const baseUrl = 'http://localhost:3030/data/destinations';
 
-export const useGetAllDestinations = () => {
+export const useGetAllDestinations = (searchCountry = '') => {
     const [destinations, setDestinations] = useStateHook([]);
     const [fetchError, setFetchError] = useSetError(null);
 
     useEffect(() => {
+
+        if (searchCountry) {
+            const searchParams = new URLSearchParams({
+                "where": `country="${searchCountry}"`,
+            });
+            const searchByCountry = async () => {
+                try {
+                    const data = await request('GET', `${baseUrl}?${searchParams.toString()}`);
+                    setDestinations(data);
+                } catch (err) {
+                    setFetchError(err.message);
+                }
+            }
+            searchByCountry()
+
+            return
+        }
+
+
 
         const fetchData = async () => {
             try {
@@ -24,7 +43,7 @@ export const useGetAllDestinations = () => {
             }
         }
         fetchData();
-    }, []);
+    }, [destinations]);
 
     return {
         destinations,
