@@ -21,9 +21,9 @@ export default function Home() {
                     <h1 className="text-4xl font-bold">Explore the world with us</h1>
                 </div>
             </div>
-            <p className="text-2xl text-center font-serif">The last 3 destinations added</p>
+            <p className="text-2xl mt-20 text-center font-serif">The last 3 destinations added</p>
 
-            <div className='flex flex-row min-h-100 justify-center items-center gap-10 bg-gray-100'>
+            <div className='flex flex-row mb-20 mt-5 min-h-100 justify-center items-center gap-10 bg-gray-100'>
 
                 {error && (
                     <div className="bg-red-100 border-l-4  text-center border-red-500 text-red-700 p-4 rounded-lg shadow-md mt-4">
