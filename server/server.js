@@ -1424,7 +1424,19 @@
                 "description": "The Burj Al Arab 'Arab Tower') is a luxury hotel in Dubai, United Arab Emirates. Developed and managed by Jumeirah, it is one of the tallest hotels in the world, although 39% of its total height is made up of non-occupiable space. Burj Al Arab stands on an artificial island that is 280 m (920 ft) from Jumeirah Beach and is connected to the mainland by a private curving bridge. The shape of the structure is designed to resemble the sail of a dhow.It has a helipad near the roof, at a height of 210 m (689 ft) above ground.",
                 "_createdOn": 1742740468589,
                 "_id": "5401c0c7-2ab0-407c-8c36-c5a0b1f58d5b"
-            }
+            },
+            "f66275c4-2f93-4de2-9784-34169341b882": {
+                "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+                "country": "Italy",
+                "town": "Rome",
+                "name": "Trevi Fountain",
+                "imageUrl": "https://c1.wallpaperflare.com/preview/259/924/891/italy-rome-trevi-fountain-sculpture.jpg",
+                "seasons": "Winter",
+                "description": "The Trevi Fountain (Italian: Fontana di Trevi) is an 18th-century fountain in the Trevi district in Rome, Italy, designed by Italian architect Nicola Salvi and completed by Giuseppe Pannini in 1762 and several others. Standing 26.3 metres (86 ft) high and 49.15 metres (161.3 ft) wide, it is the largest Baroque fountain in the city and one of the most famous fountains in the world.",
+                "_createdOn": 1743435151802,
+                "_id": "f66275c4-2f93-4de2-9784-34169341b882"
+            },
+
         },
         comments: [
             {
