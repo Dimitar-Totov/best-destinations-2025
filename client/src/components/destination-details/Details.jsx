@@ -21,9 +21,10 @@ export default function Details() {
     const { create } = useCreateLike();
     const { likes, setLikes } = useGetLikes(destinationId);
     const [likeError, setLikeError] = useSetError(null);
+    const [creatorLikeError, setCreatorLikeError] = useSetError(null);
 
     const isCreator = userId === destination._ownerId;
-    let alreadyLiked=null;
+    let alreadyLiked = null;
     if (likes) {
         alreadyLiked = likes.find(like => like.userId === userId);
     }
@@ -56,6 +57,11 @@ export default function Details() {
         }
 
         if (isCreator) {
+            setCreatorLikeError(true);
+
+            setTimeout(() => {
+                setCreatorLikeError(null);
+            }, 4000);
             return;
         }
 
@@ -144,6 +150,12 @@ export default function Details() {
                     {guestLikeError && (
                         <div className="bg-red-100 border-l-4 text-center border-red-500 text-red-700 p-4 rounded-lg shadow-md mt-4">
                             <p>Sorry, you must be logged in to like this.</p>
+                        </div>
+                    )}
+
+                    {creatorLikeError && (
+                        <div className="bg-red-100 border-l-4 text-center border-red-500 text-red-700 p-4 rounded-lg shadow-md mt-4">
+                            <p>Owners cannot like their own publications.</p>
                         </div>
                     )}
 
