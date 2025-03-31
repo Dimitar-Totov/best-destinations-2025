@@ -13,7 +13,7 @@ Welcome to Travel Destinations, a web application designed to help users explore
 - Custom Hooks – Managing state and fetching data efficiently.
 - Backend API – Fetching real-time data (SoftUni practice server).
 
-### 🌍✈️ Happy Exploring! 🌍✈️
+### 🌍✈️ Happy Exploring! ✈️🌍
 
 # How to Use
 1. Open terminal and write :
