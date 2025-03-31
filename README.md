@@ -24,4 +24,5 @@ Welcome to Travel Destinations, a web application designed to help users explore
 - `cd client` 
 - `npm install`, to install all packages
 - then write `npm run dev`
+4. Open browser and go to http://localhost:5173/
 
