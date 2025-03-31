@@ -16,10 +16,11 @@ Welcome to Travel Destinations, a web application designed to help users explore
 ### 🌍✈️ Happy Exploring! ✈️🌍
 
 # How to Use
-1. Open terminal and write :
+1. Download the repo
+2. Open terminal and write :
 - `cd server`
 - `node server.js`
-2. Open new terminal and write:
+3. Open new terminal and write:
 - `cd client` 
 - `npm install`, to install all packages
 - then write `npm run dev`
