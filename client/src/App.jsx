@@ -16,9 +16,9 @@ import Logout from './components/logout/Logout'
 import Notfound from './components/not-found/Notfound'
 import AuthGuard from './components/guards/AuthGuard'
 import GuestGuard from './components/guards/GuestGuard'
+import Profile from './components/profile-page/Profile'
 
 import './App.css'
-import Profile from './components/profile-page/Profile'
 
 function App() {
 

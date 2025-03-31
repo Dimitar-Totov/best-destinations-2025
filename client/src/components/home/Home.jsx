@@ -4,6 +4,7 @@ import { useLatestDestinations } from '../../api/destinationsApi'
 import video from '../../assets/videos/homePage.webm'
 
 export default function Home() {
+    document.title = 'Home Page';
 
     const { latestDestinations, error } = useLatestDestinations();
 

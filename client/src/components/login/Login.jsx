@@ -8,6 +8,7 @@ import mountainPicture from '../../assets/images/mountain.jpg'
 import useSetError from "../../hooks/useSetError";
 
 export default function Login() {
+    document.title = 'Login Page';
 
     const navigate = useNavigate();
     const { login } = useLogin();

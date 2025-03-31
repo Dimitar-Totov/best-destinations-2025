@@ -4,6 +4,7 @@ import { useGetAllDestinations } from "../../api/destinationsApi"
 import useStateHook from "../../hooks/useStateHook";
 
 export default function Destinations() {
+    document.title = 'Destinations Page';
 
     const [country,setCountry] = useStateHook(null);
     const { destinations, fetchError } = useGetAllDestinations(country);

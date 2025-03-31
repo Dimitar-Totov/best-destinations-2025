@@ -7,6 +7,7 @@ import mountainPicture from '../../assets/images/mountain.jpg'
 import useSetError from "../../hooks/useSetError";
 
 export default function Register() {
+    document.title = 'Register Page';
 
     const navigate = useNavigate();
     const { register } = useRegister();

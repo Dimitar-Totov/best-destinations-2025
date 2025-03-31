@@ -8,6 +8,7 @@ import useStateHook from "../../hooks/useStateHook";
 import video from '../../assets/videos/createPage.mp4'
 
 export default function Create() {
+  document.title = 'Create Destination Page';
 
   const navigate = useNavigate();
   const { create } = useCreateDestination();

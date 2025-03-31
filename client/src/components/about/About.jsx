@@ -1,6 +1,7 @@
 export default function About() {
-    return (
+    document.title = 'About Page';
 
+    return (
         <section className="relative pt-16 bg-gray-100 flex items-center justify-center min-h-screen">
             <div className="container mx-auto">
                 <div className="flex flex-wrap items-center">
