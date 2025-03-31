@@ -1,19 +1,24 @@
 import { Link } from "react-router"
 
 import { useGetAllDestinations } from "../../api/destinationsApi"
+
 import useStateHook from "../../hooks/useStateHook";
 
 export default function Destinations() {
     document.title = 'Destinations Page';
 
-    const [country,setCountry] = useStateHook(null);
-    const { destinations, fetchError } = useGetAllDestinations(country);
+    const { destinations, fetchError } = useGetAllDestinations();
+    const [filteredDestinations, setFilteredDestionation] = useStateHook([]);
+    const [searchPerformed, setSearchPerformed] = useStateHook(false);
 
-    const formSubmitHandler = (e) => {
+    const searchSubmitHandler = (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
-        setCountry(formData.get('country'));
+        const searchedCountry = formData.get('country');
+        const result = destinations.filter(destination => destination.country.toLowerCase() === searchedCountry.toLowerCase());
+        setFilteredDestionation(result);
+        setSearchPerformed(true)
     }
 
     return (
@@ -21,7 +26,7 @@ export default function Destinations() {
 
             <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
 
-                <form onSubmit={formSubmitHandler} className="max-w-md mx-auto">
+                <form onSubmit={searchSubmitHandler} className="max-w-md mx-auto">
                     <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                     <div className="relative">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -44,28 +49,61 @@ export default function Destinations() {
 
                 <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
-                    {destinations.length > 0
-                        ? destinations.map((destination) => (
-                            <div key={destination._id} className="group relative">
+                    {filteredDestinations.length > 0 ? (
+                        filteredDestinations.map((filteredDestination) => (
+                            <div key={filteredDestination._id} className="group relative mt-20">
                                 <img
-                                    alt={destination.name}
-                                    src={destination.imageUrl}
+                                    alt={filteredDestination.name}
+                                    src={filteredDestination.imageUrl}
                                     className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80"
                                 />
                                 <div className="mt-4 flex justify-between">
                                     <div>
-                                        <h3 className="text-sm text-gray-700 ">
-                                            <Link to={`/destinations/${destination._id}/details`}>
+                                        <h3 className="text-sm text-gray-700">
+                                            <Link to={`/destinations/${filteredDestination._id}/details`}>
                                                 <span aria-hidden="true" className="absolute inset-0" />
-                                                {destination.name}
+                                                {filteredDestination.name}
                                             </Link>
                                         </h3>
                                     </div>
                                 </div>
                             </div>
                         ))
-                        : fetchError ? '' : <p className="text-gray-500 dark:text-gray-400 text-center italic mt-6">No destinations yet.</p>
-                    }
+                    ) : searchPerformed ? (
+                        <div className="flex items-center justify-center min-h-[50vh]">
+                            <p className="text-gray-500 dark:text-gray-400 text-center italic">
+                                No destinations found for your search.
+                            </p>
+                        </div>
+                    ) : (
+                        destinations.length > 0 ? (
+                            destinations.map((destination) => (
+                                <div key={destination._id} className="group relative">
+                                    <img
+                                        alt={destination.name}
+                                        src={destination.imageUrl}
+                                        className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80"
+                                    />
+                                    <div className="mt-4 flex justify-between">
+                                        <div>
+                                            <h3 className="text-sm text-gray-700">
+                                                <Link to={`/destinations/${destination._id}/details`}>
+                                                    <span aria-hidden="true" className="absolute inset-0" />
+                                                    {destination.name}
+                                                </Link>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        ) : fetchError 
+                        ? ''
+                        : ((
+                            <p className="text-gray-500 dark:text-gray-400 text-center italic mt-6">
+                                No Destinations added yet.
+                            </p>
+                        ))
+                    )}
                 </div>
             </div>
         </div>

@@ -1,19 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+
 import useAuth from "../hooks/useAuth";
+import useStateHook from "../hooks/useStateHook";
+
 import request from "../utils/request";
 
 const baseUrl = 'http://localhost:3030/data/comments';
 
 export const useGetAllComments = (destinationId) => {
-    const [comments, setComments] = useState([]);
+    const [comments, setComments] = useStateHook([]);
 
     useEffect(() => {
+
+        const controller = new AbortController();
+        const signal = controller.signal;
+
         const searchParams = new URLSearchParams({
             where: `destinationId="${destinationId}"`,
         });
 
-        request('GET', `${baseUrl}?${searchParams.toString()}`)
+        request('GET', `${baseUrl}?${searchParams.toString()}`, null, { signal })
             .then(setComments);
+
+        return () => controller.abort();
+
     }, [destinationId]);
 
     return {

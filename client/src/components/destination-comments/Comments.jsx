@@ -18,11 +18,12 @@ export default function Comments() {
 
     const formActionHandler = async (formData) => {
         
-        const comment = formData.get('comment');
-
+        const comment = formData.get('comment')
+        
         try {
             const newComment = await create(destinationId, comment, username);
             setComments(state => [...state, newComment]);
+            
         } catch (err) {
             setError(err.message);
             setTimeout(() => {

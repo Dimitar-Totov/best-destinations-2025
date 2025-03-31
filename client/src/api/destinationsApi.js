@@ -9,31 +9,11 @@ import request from "../utils/request";
 
 const baseUrl = 'http://localhost:3030/data/destinations';
 
-export const useGetAllDestinations = (searchCountry = '') => {
+export const useGetAllDestinations = () => {
     const [destinations, setDestinations] = useStateHook([]);
     const [fetchError, setFetchError] = useSetError(null);
 
     useEffect(() => {
-
-        if (searchCountry) {
-            const searchParams = new URLSearchParams({
-                "where": `country="${searchCountry}"`,
-            });
-            const searchByCountry = async () => {
-                try {
-                    const data = await request('GET', `${baseUrl}?${searchParams.toString()}`);
-                    setDestinations(data);
-                } catch (err) {
-                    setFetchError(err.message);
-                }
-            }
-            searchByCountry()
-
-            return
-        }
-
-
-
         const fetchData = async () => {
             try {
                 const data = await request('GET', baseUrl);
@@ -43,7 +23,7 @@ export const useGetAllDestinations = (searchCountry = '') => {
             }
         }
         fetchData();
-    }, [destinations]);
+    }, []);
 
     return {
         destinations,
