@@ -11,6 +11,8 @@ import Comments from "../destination-comments/Comments";
 
 export default function Details() {
 
+    document.title = 'Destination Details Page';
+
     const navigate = useNavigate();
     const { destinationId } = useParams();
     const { destination, fetchError, pending } = useGetOneDestination();
