@@ -1,11 +1,13 @@
 import { Link, useNavigate } from "react-router";
-import { useContext, useState} from "react";
+import { useContext } from "react";
 
 import { useLogin } from "../../api/authApi";
 import { UserContext } from "../../contexts/UserContext";
 
-import mountainPicture from '../../assets/images/mountain.jpg'
 import useSetError from "../../hooks/useSetError";
+import useStateHook from "../../hooks/useStateHook";
+
+import mountainPicture from '../../assets/images/mountain.jpg'
 
 export default function Login() {
     document.title = 'Login Page';
@@ -15,7 +17,7 @@ export default function Login() {
     const { userLoginHandler } = useContext(UserContext);
     const [loginError, setLoginError] = useSetError(null);
 
-    const [inputData, setInputData] = useState({
+    const [inputData, setInputData] = useStateHook({
         email: '',
         password: '',
     });
@@ -30,6 +32,7 @@ export default function Login() {
         try {
             const authData = await login(inputData.email, inputData.password);
             userLoginHandler(authData);
+            setPending(false);
             navigate('/');
         } catch (err) {
             setLoginError(err.message);
