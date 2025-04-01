@@ -1,0 +1,23 @@
+.explore {
+    font-family: sans-serif;
+    font-size: 3em;
+    display: inline-block;
+    padding: 10px 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: linear-gradient(120deg, rgb(120, 210, 200), rgb(0, 200, 180));
+    background-size: 100% 8px;
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    border-radius: 12px;
+    transition: background-size 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                background-position 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: background-size, background-position;
+}
+
+.explore:hover {
+    background-size: 100% 100%;
+    background-position: 0% 100%;
+}

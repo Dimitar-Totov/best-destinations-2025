@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { useLatestDestinations } from '../../api/destinationsApi'
 
 import video from '../../assets/videos/homePage.webm'
+import style from './explore.module.css'
 
 export default function Home() {
     document.title = 'Home Page';
@@ -18,7 +19,7 @@ export default function Home() {
                     <video className="w-full h-full object-cover" src={video} autoPlay loop muted />
                 </div>
                 <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
-                    <h1 className="text-4xl font-bold">Explore the world with us</h1>
+                    <Link to={'/destinations'} className={style.explore}>Explore the world with us</Link>
                 </div>
             </div>
             <p className="text-2xl mt-20 text-center font-serif">The last 3 destinations added</p>
