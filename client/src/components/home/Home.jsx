@@ -8,7 +8,7 @@ import video from '../../assets/videos/homePage.webm'
 export default function Home() {
     document.title = 'Home Page';
 
-    const { latestDestinations, error } = useLatestDestinations();
+    const { latestDestinations, error, pending } = useLatestDestinations();
 
     return (
         <>
@@ -49,7 +49,7 @@ export default function Home() {
                                             {destination.name}
                                         </h5>
                                         <p className="mb-2 font-serif text-xl text-gray-700 dark:text-gray-400">
-                                           Country:
+                                            Country:
                                         </p>
                                         <p className="mb-3 flex-grow font-normal text-gray-700 dark:text-gray-400">
                                             {destination.country}
@@ -68,9 +68,13 @@ export default function Home() {
 
                             ))}
                         </div>
-                        : <p className="text-gray-500 dark:text-gray-400 text-center italic mt-6">No destinations yet.</p>
+                        : pending ? (
+                            <div className="flex items-center justify-center">
+                                <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+                            </div>
+                        ) : < p className="text-gray-500 dark:text-gray-400 text-center italic mt-6">No destinations yet.</p>
                 )}
-            </div>
+            </div >
 
 
         </>

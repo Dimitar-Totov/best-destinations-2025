@@ -7,7 +7,7 @@ import useStateHook from "../../hooks/useStateHook";
 export default function Destinations() {
     document.title = 'Destinations Page';
 
-    const { destinations, fetchError } = useGetAllDestinations();
+    const { destinations, fetchError, pending } = useGetAllDestinations();
     const [filteredDestinations, setFilteredDestionation] = useStateHook([]);
     const [searchPerformed, setSearchPerformed] = useStateHook(false);
 
@@ -96,13 +96,17 @@ export default function Destinations() {
                                     </div>
                                 </div>
                             ))
-                        ) : fetchError 
-                        ? ''
-                        : ((
-                            <p className="text-gray-500 dark:text-gray-400 text-center italic mt-6">
-                                No Destinations added yet.
-                            </p>
-                        ))
+                        ) : fetchError
+                            ? ''
+                            : pending ? (
+                                <div className="flex items-center justify-center">
+                                    <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+                                </div>
+                            ) : ((
+                                <p className="text-gray-500 dark:text-gray-400 text-center italic mt-6">
+                                    No Destinations added yet.
+                                </p>
+                            ))
                     )}
                 </div>
             </div>

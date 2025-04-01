@@ -12,6 +12,7 @@ const baseUrl = 'http://localhost:3030/data/destinations';
 export const useGetAllDestinations = () => {
     const [destinations, setDestinations] = useStateHook([]);
     const [fetchError, setFetchError] = useSetError(null);
+    const [pending, setPending] = useStateHook(true);
 
     useEffect(() => {
 
@@ -19,6 +20,7 @@ export const useGetAllDestinations = () => {
             try {
                 const data = await request('GET', baseUrl);
                 setDestinations(data);
+                setPending(false);
             } catch (err) {
                 setFetchError(err.message);
             }
@@ -29,6 +31,7 @@ export const useGetAllDestinations = () => {
     return {
         destinations,
         fetchError,
+        pending
     }
 }
 
@@ -36,6 +39,7 @@ export const useGetOneDestination = () => {
     const [destination, setDestination] = useStateHook({});
     const { destinationId } = useParams();
     const [fetchError, setFetchError] = useSetError(null);
+    const [pending, setPending] = useStateHook(true)
 
     useEffect(() => {
         request('GET', `${baseUrl}/${destinationId}`)
@@ -43,12 +47,14 @@ export const useGetOneDestination = () => {
                 if (response.message) {
                     return setFetchError(response.message);
                 }
+                setPending(false)
                 setDestination(response);
             })
     }, [])
     return {
         destination,
         fetchError,
+        pending,
     }
 }
 
@@ -140,8 +146,10 @@ export const useDeleteDestination = () => {
 }
 
 export const useLatestDestinations = () => {
+
     const [latestDestinations, setLatestDestinations] = useStateHook([]);
     const [error, setError] = useSetError(null);
+    const [pending, setPending] = useStateHook(true);
 
     useEffect(() => {
         const searchParams = new URLSearchParams({
@@ -151,7 +159,10 @@ export const useLatestDestinations = () => {
         });
 
         request('GET', `${baseUrl}?${searchParams.toString()}`)
-            .then(response => setLatestDestinations(response))
+            .then(response => {
+                setPending(false);
+                return setLatestDestinations(response)
+            })
             .catch(err => {
                 setError(err.message);
             });
@@ -160,6 +171,7 @@ export const useLatestDestinations = () => {
     return {
         latestDestinations,
         error,
+        pending,
     }
 }
 
