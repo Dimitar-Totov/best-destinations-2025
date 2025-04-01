@@ -1,4 +1,5 @@
 import { useParams } from "react-router";
+import { useOptimistic } from "react";
 
 import { useCreateComment, useGetAllComments } from "../../api/commentsApi";
 
@@ -6,6 +7,7 @@ import useAuth from "../../hooks/useAuth";
 import useSetError from "../../hooks/useSetError";
 
 import formatDate from "../../utils/formatDate";
+import { v4 as uuid } from 'uuid'
 
 export default function Comments({
     isCreator,
@@ -13,16 +15,28 @@ export default function Comments({
 
     const { destinationId } = useParams();
 
-    const { username, isAuthenticated } = useAuth()
+    const { username, isAuthenticated, _id } = useAuth()
     const { create } = useCreateComment();
     const { comments, setComments } = useGetAllComments(destinationId);
     const [error, setError] = useSetError(null);
+    const [optimisticComment, setOptimisticComment] = useOptimistic(comments, (state, newComment) => [...state, newComment]);
 
     const formActionHandler = async (formData) => {
 
         const comment = formData.get('comment')
 
+        const newOptimisticComment = {
+            _ownerId: _id,
+            destinationId,
+            comment,
+            pending: true,
+            author: username,
+            _id: uuid(),
+        }
+
         try {
+            setOptimisticComment(newOptimisticComment);
+
             const newComment = await create(destinationId, comment, username);
             setComments(state => [...state, newComment]);
 
@@ -70,8 +84,8 @@ export default function Comments({
                     : ''
                 }
                 {comments.length > 0
-                    ? comments.map(comment => (
-                        <article key={comment._id} className="p-6 text-base bg-white rounded-lg dark:bg-gray-900">
+                    ? optimisticComment.map(comment => (
+                        <article key={comment._id} className={`p-6 text-base ${comment.pending ? "bg-gray-200" : "bg-white"} rounded-lg  dark:bg-gray-900`}>
                             <footer className="flex justify-between items-center mb-2">
                                 <div className="flex items-center">
                                     <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">{comment.author}</p>
