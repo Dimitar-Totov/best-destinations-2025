@@ -9,7 +9,7 @@ export default function Edit() {
 
     const navigate = useNavigate();
     const { destinationId } = useParams();
-    const { destination } = useGetOneDestination()
+    const { destination, pending } = useGetOneDestination()
     const { edit } = useEditDestination();
     const [error, setError] = useSetError(null)
 
@@ -62,76 +62,82 @@ export default function Edit() {
                         </div>
                     )}
 
-                    <form onSubmit={formSubmitHandler}>
-                        <div className="mb-4">
-                            <label htmlFor="country" className="block text-gray-700">Country</label>
-                            <input
-                                defaultValue={destination.country}
-                                type="text"
-                                name="country"
-                                id="country"
-                                className="w-full px-4 py-2 border rounded"
-                            />
+                    {pending ? (
+                        <div className="flex items-center justify-center h-100">
+                            <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
                         </div>
-                        <div className="mb-4">
-                            <label htmlFor="town" className="block text-gray-700">Town</label>
-                            <input
-                                defaultValue={destination.town}
-                                type="text"
-                                name="town"
-                                id="town"
-                                className="w-full px-4 py-2 border rounded"
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="name" className="block text-gray-700">Name</label>
-                            <input
-                                defaultValue={destination.name}
-                                type="text"
-                                name="name"
-                                id="name"
-                                className="w-full px-4 py-2 border rounded"
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="imageUrl" className="block text-gray-700">Image url</label>
-                            <input
-                                defaultValue={destination.imageUrl}
-                                type="text"
-                                name="imageUrl"
-                                id="imageUrl"
-                                className="w-full px-4 py-2 border rounded"
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-700 dark:text-white">Best season to visit</label>
-                            <select id="countries" name="seasons" defaultValue={destination.seasons} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected={destination.seasons === 'All seasons'} value="All seasons">All seasons</option>
-                                <option selected={destination.seasons === 'Spring'} value="Spring">Spring</option>
-                                <option selected={destination.seasons === 'Summer'} value="Summer">Summer</option>
-                                <option selected={destination.seasons === 'Fall'} value="Fall">Fall</option>
-                                <option selected={destination.seasons === 'Winter'} value="Winter">Winter</option>
-                            </select>
-                        </div>
-                        <div className="mb-4">
-                            <label htmlFor="description" className="block text-gray-700">Description</label>
-                            <textarea
-                                defaultValue={destination.description}
-                                name="description"
-                                id="description"
-                                rows="6"
-                                className="w-full px-4 py-2 border rounded resize-y"
-                            ></textarea>
-                        </div>
-                        <div className="flex justify-center gap-4 m-10">
-                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">
-                                Edit
-                            </button>
-                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={cancelClickHandler}>
-                                Cancel
-                            </button>
-                        </div>
-                    </form>
+                    ) : (
+                        <form onSubmit={formSubmitHandler}>
+                            <div className="mb-4">
+                                <label htmlFor="country" className="block text-gray-700">Country</label>
+                                <input
+                                    defaultValue={destination.country}
+                                    type="text"
+                                    name="country"
+                                    id="country"
+                                    className="w-full px-4 py-2 border rounded"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label htmlFor="town" className="block text-gray-700">Town</label>
+                                <input
+                                    defaultValue={destination.town}
+                                    type="text"
+                                    name="town"
+                                    id="town"
+                                    className="w-full px-4 py-2 border rounded"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label htmlFor="name" className="block text-gray-700">Name</label>
+                                <input
+                                    defaultValue={destination.name}
+                                    type="text"
+                                    name="name"
+                                    id="name"
+                                    className="w-full px-4 py-2 border rounded"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label htmlFor="imageUrl" className="block text-gray-700">Image url</label>
+                                <input
+                                    defaultValue={destination.imageUrl}
+                                    type="text"
+                                    name="imageUrl"
+                                    id="imageUrl"
+                                    className="w-full px-4 py-2 border rounded"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-700 dark:text-white">Best season to visit</label>
+                                <select id="countries" name="seasons" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option selected={destination.seasons === "All seasons"} value="All seasons">All seasons</option>
+                                    <option selected={destination.seasons === "Spring"} value="Spring">Spring</option>
+                                    <option selected={destination.seasons === "Summer"} value="Summer">Summer</option>
+                                    <option selected={destination.seasons === "Fall"} value="Fall">Fall</option>
+                                    <option selected={destination.seasons === "Winter"} value="Winter">Winter</option>
+                                </select>
+                            </div>
+                            <div className="mb-4">
+                                <label htmlFor="description" className="block text-gray-700">Description</label>
+                                <textarea
+                                    defaultValue={destination.description}
+                                    name="description"
+                                    id="description"
+                                    rows="6"
+                                    className="w-full px-4 py-2 border rounded resize-y"
+                                ></textarea>
+                            </div>
+                            <div className="flex justify-center gap-4 m-10">
+                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">
+                                    Edit
+                                </button>
+                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" onClick={cancelClickHandler}>
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    )}
                 </div>
             </div>
         </div>
