@@ -17,7 +17,7 @@ export default function Comments({
 
     const { username, isAuthenticated, _id } = useAuth()
     const { create } = useCreateComment();
-    const { comments, setComments } = useGetAllComments(destinationId);
+    const { comments, setComments, pending } = useGetAllComments(destinationId);
     const [error, setError] = useSetError(null);
     const [optimisticComment, setOptimisticComment] = useOptimistic(comments, (state, newComment) => [...state, newComment]);
 
@@ -52,7 +52,7 @@ export default function Comments({
         <section className="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
 
             {error && (
-                <div className="bg-red-100 border-l-4 text-center border-red-500 text-red-700 p-4 rounded-lg shadow-md mt-4">
+                <div className="bg-red-100 border-l-4 text-center border-red-500 text-red-700 p-4 mb-10 rounded-lg shadow-md mt-4">
                     <p>{error}</p>
                 </div>
             )}
@@ -89,14 +89,18 @@ export default function Comments({
                             <footer className="flex justify-between items-center mb-2">
                                 <div className="flex items-center">
                                     <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">{comment.author}</p>
-                                    <p className="text-sm text-gray-600 dark:text-gray-400">{formatDate(comment._createdOn)}</p>
+                                    {comment.pending ? '' : <p className="text-sm text-gray-600 dark:text-gray-400">{formatDate(comment._createdOn)}</p>}
                                 </div>
                             </footer>
-                            <p className="text-gray-500 dark:text-gray-400">{comment.comment}</p>
+                            {comment.pending ? <p className="text-gray-500 dark:text-gray-400">Loading...</p> : <p className="text-gray-500 dark:text-gray-400">{comment.comment}</p>}
                             <hr className="my-4 border-gray-300 dark:border-gray-700" />
                         </article>
                     ))
-                    : <p className="text-gray-500 dark:text-gray-400 text-center italic mt-6">No comments yet.</p>
+                    : pending ? (
+                        <div className="flex items-center justify-center">
+                            <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+                        </div>
+                    ) : <p className="text-gray-500 dark:text-gray-400 text-center italic mt-6">No comments yet.</p>
                 }
             </div>
         </section>

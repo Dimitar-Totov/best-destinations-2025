@@ -9,6 +9,7 @@ const baseUrl = 'http://localhost:3030/data/comments';
 
 export const useGetAllComments = (destinationId) => {
     const [comments, setComments] = useStateHook([]);
+    const [pending, setPending] = useStateHook(true);
 
     useEffect(() => {
 
@@ -17,13 +18,17 @@ export const useGetAllComments = (destinationId) => {
         });
 
         request('GET', `${baseUrl}?${searchParams.toString()}`)
-            .then(setComments);
+            .then(response => {
+                setComments(response);
+                setPending(false)
+            });
 
     }, [destinationId]);
 
     return {
         comments,
         setComments,
+        pending,
     };
 }
 
