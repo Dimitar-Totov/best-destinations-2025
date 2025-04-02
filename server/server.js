@@ -1347,8 +1347,8 @@
         }
     };
     var seedData = {
-        destinations: {
-            "7031ba71-ae15-46fe-84d5-07b20b52a738": {
+        destinations: [
+            {
                 "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
                 "country": "French Polynesia",
                 "town": "Vaitape",
@@ -1359,7 +1359,7 @@
                 "_createdOn": 1742740468583,
                 "_id": "7031ba71-ae15-46fe-84d5-07b20b52a738"
             },
-            "69c4bbed-112c-463a-9da9-a0c884f97603": {
+            {
                 "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
                 "country": "France",
                 "town": "Paris",
@@ -1370,9 +1370,9 @@
                 "_createdOn": 1742740468584,
                 "_id": "69c4bbed-112c-463a-9da9-a0c884f97603"
             },
-            "6de1ba6c-be01-41f4-afe6-2e37941d0040": {
+            {
                 "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
-                "country": "UK",
+                "country": "United Kingdom",
                 "town": "London",
                 "name": "Tower Bridge",
                 "imageUrl": "https://i0.wp.com/www.awalkandalark.com/wp-content/uploads/2020/03/Tower-Bridge-at-night.jpg?fit=1100%2C825&ssl=1",
@@ -1381,7 +1381,7 @@
                 "_createdOn": 1742740468585,
                 "_id": "6de1ba6c-be01-41f4-afe6-2e37941d0040"
             },
-            "1479ad1d-991a-48ea-b0d2-1b021551e408": {
+            {
                 "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
                 "country": "Italy",
                 "town": "Rome",
@@ -1392,7 +1392,7 @@
                 "_createdOn": 1742740468586,
                 "_id": "1479ad1d-991a-48ea-b0d2-1b021551e408"
             },
-            "a456a100-613c-4c78-983a-c5d706a2472d": {
+            {
                 "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
                 "country": "Indonesia",
                 "town": "Denpasar",
@@ -1403,7 +1403,7 @@
                 "_createdOn": 1742740468587,
                 "_id": "a456a100-613c-4c78-983a-c5d706a2472d"
             },
-            "12e21a5c-f6a7-4c7f-bbd9-bfd5fb18d1e9": {
+            {
                 "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
                 "country": "Thailand",
                 "town": "Bangkok",
@@ -1414,7 +1414,7 @@
                 "_createdOn": 1742740468588,
                 "_id": "12e21a5c-f6a7-4c7f-bbd9-bfd5fb18d1e9"
             },
-            "5401c0c7-2ab0-407c-8c36-c5a0b1f58d5b": {
+            {
                 "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
                 "country": "United Arab Emirates",
                 "town": "Dubai",
@@ -1425,7 +1425,7 @@
                 "_createdOn": 1742740468589,
                 "_id": "5401c0c7-2ab0-407c-8c36-c5a0b1f58d5b"
             },
-            "f66275c4-2f93-4de2-9784-34169341b882": {
+            {
                 "_ownerId": "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
                 "country": "Italy",
                 "town": "Rome",
@@ -1436,8 +1436,62 @@
                 "_createdOn": 1743435151802,
                 "_id": "f66275c4-2f93-4de2-9784-34169341b882"
             },
-
-        },
+            {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "country": "United Kingdom",
+                "town": "Wiltshire",
+                "name": "Stonehenge",
+                "imageUrl": "https://www.olympus-europa.com/company/media/content/news/ssd/210209-olympus-stonehenge-origins/stonehenge_image_2-credit-andre-pattenden_english-heritage_img_1200.jpg",
+                "seasons": "Spring",
+                "description": "Stonehenge is a prehistoric megalithic structure on Salisbury Plain in Wiltshire, England, two miles (3 km) west of Amesbury. It consists of an outer ring of vertical sarsen standing stones, each around 13 feet (4.0 m) high, seven feet (2.1 m) wide, and weighing around 25 tons, topped by connecting horizontal lintel stones, held in place with mortise and tenon joints, a feature unique among contemporary monuments. Inside is a ring of smaller bluestones. Inside these are free-standing trilithons, two bulkier vertical sarsens joined by one lintel.",
+                "_createdOn": 1743618199033,
+                "_id": "1236fff0-7c5e-458e-9528-6468245bea78"
+            },
+            {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "country": "United States",
+                "town": "Montana",
+                "name": "Glacier National Park",
+                "imageUrl": "https://gatherandgotravel.com/wp-content/uploads/2023/12/grinnell-lake-from-grinnell-glacier-trail-montana-credit-gatherandgotravel.com_-1024x575.webp",
+                "seasons": "Summer",
+                "description": "Glacier National Park is a 1,583-sq.-mi. wilderness area in Montana's Rocky Mountains, with glacier-carved peaks and valleys running to the Canadian border. It's crossed by the mountainous Going-to-the-Sun Road. Among more than 700 miles of hiking trails, it has a route to photogenic Hidden Lake. Other activities include backpacking, cycling and camping. ",
+                "_createdOn": 1743618323494,
+                "_id": "3ac918c0-40c4-4d36-8788-7995651e6d21"
+            },
+            {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "country": "Bulgaria",
+                "town": "117 km south of the capital Sofia",
+                "name": "Rila Monastery",
+                "imageUrl": "https://www.vagabond.bg/sites/default/files/2022-02/rila%20monastery%20air.jpg",
+                "seasons": "",
+                "description": "The Monastery of Saint John of Rila, also known as Rila Monastery (\"Sveti Ivan Rilski\" (Bulgarian: Рилски манастир „Свети Иван Рилски“), is the largest and most famous Eastern Orthodox monastery in Bulgaria. It is situated in the southwestern Rila Mountains, 117 km (73 mi) south of the capital Sofia in the deep valley of the Rilska River (\"Rila River\") at an elevation of 1,147 m (3,763 ft) above sea level, inside of Rila Monastery Nature Park and in close vicinity of the Rila Monastery Forest Nature Reserve.",
+                "_createdOn": 1743618512917,
+                "_id": "2aa97c80-d0fa-4ad6-87d7-1c50472fa0f3"
+            },
+            {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "country": "Bulgaria",
+                "town": "Northwestern Rila Mountain",
+                "name": "The Seven Rila Lakes",
+                "imageUrl": "https://freesofiatour.com/wp-content/uploads/2018/05/seven-rila-lakes-how-to-get-to-1200x675.jpeg",
+                "seasons": "Summer",
+                "description": "The Seven Rila Lakes (Bulgarian: Седемте рилски езера, romanized: Sedemte rilski ezera, pronounced [sɛdɛmˈtɛ ˈriɫski ɛzɛˈra]) are a group of glacial lakes, situated in the northwestern Rila Mountain in Bulgaria. Situated between 2,100 and 2,500 metres elevation above sea level, they are the most visited group of lakes in Bulgaria.\nEach lake carries a name associated with its most characteristic feature. The highest one is called Salzata (\"The Tear\") due to its clear waters that allow visibility in depth. ",
+                "_createdOn": 1743618678872,
+                "_id": "c4c6c0de-d26e-438b-bd9e-5b338656703a"
+            },
+            {
+                "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
+                "country": "Finland",
+                "town": "Rovaniemi",
+                "name": "Lapland",
+                "imageUrl": "https://apukkaresort.fi/wp-content/uploads/2024/04/kammi-apukka-resort-rovaniemi-lapland-finland-2-uai-1024x1024.jpg",
+                "seasons": "Winter",
+                "description": "Lapland is the largest and northernmost region of Finland. The 21 municipalities in the region cooperate in a Regional Council. Lapland borders the Finnish region of North Ostrobothnia in the south. It also borders the Gulf of Bothnia, Norrbotten County in Sweden, Finnmark County and Troms County in Norway, and Murmansk Oblast and the Republic of Karelia in Russia. The topography of Lapland varies from vast mires and forests in the south to fells in the north. The Arctic Circle crosses Lapland, so polar phenomena such as the midnight sun and polar night can be viewed in this region.",
+                "_createdOn": 1743618912361,
+                "_id": "394567da-faed-409b-aae3-cc33c9b9adda"
+            }
+        ],
         comments: [
             {
                 "_ownerId": "ff95ca44-3253-4019-8582-d73fa8ff768d",
