@@ -175,4 +175,32 @@ export const useLatestDestinations = () => {
     }
 }
 
+export const useGetOwnCreatedDestinations = () => {
+    const { _id } = useAuth()
+    const [ownCreated, setOwnCreated] = useStateHook([]);
+    const [fetchError, setFetchError] = useSetError(null);
+    const [pending, setPending] = useStateHook(true);
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams({
+            where: `_ownerId="${_id}"`,
+        });
+
+        request('GET', `${baseUrl}?${searchParams.toString()}`)
+            .then(response => {
+                setPending(false);
+                return setOwnCreated(response)
+            })
+            .catch(err => {
+                setFetchError(err.message);
+            });
+    }, []);
+
+    return {
+        ownCreated,
+        fetchError,
+        pending,
+    }
+}
+
 
