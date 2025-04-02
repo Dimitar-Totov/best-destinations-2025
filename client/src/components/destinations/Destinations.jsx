@@ -10,7 +10,7 @@ export default function Destinations() {
     const { destinations, fetchError, pending } = useGetAllDestinations();
     const [filteredDestinations, setFilteredDestionation] = useStateHook([]);
     const [searchPerformed, setSearchPerformed] = useStateHook(false);
-
+    
     const searchSubmitHandler = (e) => {
         e.preventDefault();
 
@@ -20,7 +20,7 @@ export default function Destinations() {
         setFilteredDestionation(result);
         setSearchPerformed(true)
     }
-
+    
     return (
         <div className="bg-gray-100">
 
